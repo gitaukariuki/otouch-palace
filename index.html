@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O-Touch Palace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom styles for O-Touch Palace Theme */
+        body {
+            font-family: 'Inter', sans-serif; /* Use Inter for body */
+            background-color: #f7f5f0; /* Off-white background */
+            color: #333;
+            margin: 0; /* Reset default body margin */
+            overflow-x: hidden;  /* Prevent horizontal scrollbar */
+        }
+        .container {
+            max-width: 1200px; /* Increased max-width for larger screens */
+            margin: 0 auto; /* Center the container */
+            padding: 0 20px; /* Add horizontal padding */
+        }
+        header {
+            background-color: #ffffff; /* White header */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed; /* Make header sticky */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0; /* Increased header padding */
+        }
+        header .logo {
+            font-family: 'Playfair Display', serif; /* Use Playfair Display for logo */
+            font-size: 2rem; /* Larger logo */
+            color: #1a202c; /* Very dark gray, almost black */
+        }
+        header nav ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header nav ul li {
+            margin-left: 30px; /* Increased spacing between nav items */
+        }
+        header nav ul li a {
+            font-family: 'Playfair Display', serif; /* Use Playfair Display for nav links */
+            color: #4a5568; /* Dark gray */
+            text-decoration: none;
+            font-size: 1.1rem; /* Slightly larger nav links */
+            transition: color 0.3s ease;
+        }
+        header nav ul li a:hover {
+            color: #a78bfa; /* Tailwind's purple-400 on hover */
+        }
+        header .hamburger-btn {
+            color: #4a5568; /* Dark gray hamburger icon */
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        #mobile-menu .menu-content {
+            background-color: #fff;
+            width: 80%;
+            max-width: 320px; /* Increased max-width for mobile menu */
+            height: 100%;
+            position: absolute;
+            right: 0;
+            padding: 30px; /* Increased padding for mobile menu content */
+            display: flex;
+            flex-direction: column;
+        }
+        #mobile-menu .close-btn {
+            color: #4a5568; /* Dark gray close button */
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-bottom: 20px; /* Increased close button margin */
+            align-self: flex-end;
+        }
+        #mobile-menu nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #mobile-menu nav ul li {
+            margin-bottom: 25px; /* Increased spacing in mobile menu */
+        }
+        #mobile-menu nav ul li a {
+            color: #4a5568; /* Dark gray mobile menu links */
+            text-decoration: none;
+            font-size: 1.2rem; /* Larger mobile menu links */
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+        #mobile-menu nav ul li a:hover {
+            color: #a78bfa; /* Tailwind's purple-400 on hover */
+        }
+
+        section {
+            padding: 80px 0; /* Increased section padding */
+            margin-top: 80px; /* Add top margin to sections below header */
+        }
+        section h2 {
+            font-family: 'Playfair Display', serif; /* Use Playfair Display for section titles */
+            font-size: 2.5rem; /* Larger section titles */
+            color: #1a202c; /* Very dark gray */
+            margin-bottom: 40px; /* Increased section title margin */
+            text-align: center;
+        }
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .section-content p {
+            color: #4a5568; /* Dark gray paragraph text */
+            font-size: 1.1rem; /* Slightly larger paragraph text */
+            line-height: 1.7; /* Increased line height for better readability */
+            margin-bottom: 20px;
+        }
+        .section-content .btn {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+            padding: 15px 30px; /* Increased button padding */
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem; /* Larger button text */
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+        .section-content .btn:hover {
+            background-color: #7e57c2; /* Tailwind's purple-600 on hover */
+        }
+
+        #about .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; /* Increased gap in about section */
+            align-items: center;
+        }
+        #about .grid img {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+        }
+        #about .grid .content {
+            text-align: left;
+        }
+        #about .grid .content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; /* Larger sub-heading */
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        #restaurant .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; /* Increased gap in restaurant section */
+            align-items: center;
+        }
+        #restaurant .grid img {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+        }
+        #restaurant .grid .content {
+            text-align: left;
+        }
+        #restaurant .grid .content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; /* Larger sub-heading */
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        #club .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px; /* Increased gap in club section */
+            align-items: center;
+        }
+        #club .grid img {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+        }
+        #club .grid .content {
+            text-align: left;
+        }
+        #club .grid .content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; /* Larger sub-heading */
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        #rooms .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        #rooms .grid .room-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        #rooms .grid .room-card:hover {
+            transform: translateY(-5px);
+        }
+        #rooms .grid .room-card img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        #rooms .grid .room-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; /* Larger room card title */
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        #rooms .grid .room-card p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        #team .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        #team .grid .team-member {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        #team .grid .team-member:hover {
+            transform: translateY(-5px);
+        }
+        #team .grid .team-member img {
+            border-radius: 50%;
+            width: 150px; /* Increased team member image size */
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        #team .grid .team-member h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; /* Larger team member name */
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        #team .grid .team-member p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        #testimonials {
+            background-color: #f7f5f0;
+        }
+        #testimonials h2{
+            color: #1a202c;
+        }
+        #testimonials .swiper {
+            width: 100%;
+            height: auto;
+        }
+        #testimonials .swiper-slide {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px; /* Increased padding for testimonials */
+            text-align: center;
+            font-size: 1.1rem; /* Larger testimonial text */
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.7;
+        }
+        #testimonials .swiper-slide .author {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; /* Larger author name */
+            color: #a78bfa;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        #testimonials .swiper-pagination-bullet-active {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+        }
+        #testimonials .swiper-button-prev,
+        #testimonials .swiper-button-next {
+            color: #a78bfa; /* Tailwind's purple-400 */
+            font-size: 1.5rem; /* Larger navigation arrows */
+        }
+        #testimonials .swiper-button-prev:after,
+        #testimonials .swiper-button-next:after {
+            font-size: 2rem; /* Increase size of the arrows */
+        }
+
+
+        #contact {
+            background-color: #ffffff;
+        }
+        #contact h2{
+            color:#1a202c;
+        }
+        #contact .contact-form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 40px; /* Increased padding for contact form */
+            margin-top: 40px;
+        }
+        #contact .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Increased gap in contact form */
+        }
+        #contact .contact-form label {
+            font-family: 'Playfair Display', serif;
+            color: #1a202c;
+            font-size: 1.1rem; /* Larger label text */
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+        #contact .contact-form input,
+        #contact .contact-form textarea {
+            border: 2px solid #e2e8f0; /* Tailwind's gray-200 */
+            border-radius: 5px;
+            padding: 12px 15px; /* Increased input padding */
+            font-size: 1.1rem; /* Larger input text */
+            color: #4a5568;
+            outline: none;
+            transition: border-color 0.2s ease;
+            width: 100%;
+        }
+        #contact .contact-form input:focus,
+        #contact .contact-form textarea:focus {
+            border-color: #a78bfa; /* Tailwind's purple-400 on focus */
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.16); /* Add a subtle shadow */
+        }
+        #contact .contact-form textarea {
+            resize: vertical;
+            height: 150px; /* Increased textarea height */
+        }
+        #contact .contact-form button {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+            padding: 15px 30px; /* Increased button padding */
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1rem; /* Larger button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            width: auto;
+            align-self: center;
+        }
+        #contact .contact-form button:hover {
+            background-color: #7e57c2; /* Tailwind's purple-600 on hover */
+        }
+        #contact .contact-form .message-sent {
+            margin-top: 20px;
+            color: #38a169; /* Tailwind's green-600 */
+            font-size: 1.1rem; /* Larger message text */
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        footer {
+            background-color: #1a202c; /* Very dark gray footer */
+            color: #fff;
+            padding: 25px 0; /* Increased footer padding */
+            text-align: center;
+            font-size: 1.1rem; /* Larger footer text */
+            margin-top: 0; /* Reset default footer margin-top */
+            position: relative; /* Allows for absolute positioning of the scroll-to-top button */
+        }
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        footer .contact-info {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #e2e8f0;
+        }
+
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 600px; /* Increased carousel height */
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 60px; /* Increased carousel margin */
+        }
+        .carousel .carousel-inner {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel .carousel-item {
+            flex: 1 0 100%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover; /* Ensure image covers the entire container */
+            background-position: center;
+        }
+        .carousel .carousel-item.active {
+            opacity: 1;
+            z-index: 10;
+        }
+        .carousel .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel .carousel-item .carousel-caption {
+            position: absolute;
+            bottom: 70px; /* Increased caption bottom position */
+            left: 50px; /* Increased caption left position */
+            color: #fff;
+            text-align: left;
+            padding: 30px; /* Increased caption padding */
+            background-color: rgba(0,0,0,0.3); /* Slightly more opaque caption background */
+            border-radius: 10px;
+            width: 50%; /* Increased caption width */
+        }
+        .carousel .carousel-item .carousel-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem; /* Larger caption title */
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .carousel .carousel-item .carousel-caption p {
+            font-size: 1.2rem; /* Larger caption text */
+            line-height: 1.8; /* Increased caption line height */
+        }
+        .carousel .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px; /* Increased gap between controls */
+            z-index: 10;
+        }
+        .carousel .carousel-control {
+            background-color: rgba(255,255,255,0.5); /* Semi-transparent controls */
+            color: #1a202c;
+            border: none;
+            padding: 12px 15px; /* Increased control padding */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem; /* Larger control text */
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+        .carousel .carousel-control:hover {
+            background-color: rgba(255,255,255,0.8); /* Slightly more opaque on hover */
+        }
+        .carousel .carousel-indicators {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .carousel .carousel-indicator {
+            width: 12px; /* Increased indicator width */
+            height: 12px; /* Increased indicator height */
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5); /* Semi-transparent indicators */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .carousel .carousel-indicator.active {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+        }
+
+        /* Photo and Video Gallery Styles */
+        #gallery {
+            background-color: #f7f5f0;
+        }
+        #gallery h2{
+            color: #1a202c;
+        }
+        #gallery .gallery-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px; /* Increased filter button margin */
+            gap: 15px;
+        }
+        #gallery .gallery-filter button {
+            background-color: #fff;
+            color: #4a5568;
+            border: none;
+            padding: 12px 25px; /* Increased filter button padding */
+            border-radius: 5px;
+            font-size: 1.1rem; /* Larger filter button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #gallery .gallery-filter button:hover,
+        #gallery .gallery-filter button.active {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+        }
+        #gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased min width */
+            gap: 30px; /* Increased gallery grid gap */
+            margin-top: 40px;
+        }
+        #gallery .gallery-grid .item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #gallery .gallery-grid .item:hover {
+            transform: scale(1.05);
+        }
+        #gallery .gallery-grid .item img,
+        #gallery .gallery-grid .item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        #gallery .gallery-grid .item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #gallery .gallery-grid .item:hover .overlay {
+            opacity: 1;
+        }
+        #gallery .gallery-grid .item .overlay i {
+            color: #fff;
+            font-size: 2rem; /* Larger icon in overlay */
+        }
+
+        /* Google Map Styles */
+        #map {
+            height: 400px; /* Reduced map height */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 60px; /* Increased map margin */
+            width: 100%;
+        }
+        #map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Newsletter Styles */
+        #newsletter {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            padding: 60px 0; /* Increased newsletter padding */
+            text-align: center;
+        }
+        #newsletter h2 {
+            color: #fff;
+            font-size: 2.5rem; /* Larger newsletter title */
+            margin-bottom: 30px; /* Increased newsletter title margin */
+        }
+        #newsletter p {
+            color: #f7fafc; /* Tailwind's gray-100 */
+            font-size: 1.1rem; /* Larger newsletter text */
+            margin-bottom: 30px; /* Increased newsletter text margin */
+        }
+        #newsletter form {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically by default */
+            align-items: center; /* Center items horizontally */
+            max-width: 500px; /* Increased newsletter form width */
+            margin: 0 auto;
+            gap: 15px; /* Increased gap */
+        }
+        #newsletter form input {
+            padding: 12px 15px; /* Increased newsletter input padding */
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1rem; /* Larger newsletter input text */
+            color: #4a5568;
+            outline: none;
+            width: 100%; /* Make input full width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        #newsletter form button {
+            background-color: #fff;
+            color: #a78bfa; /* Tailwind's purple-400 */
+            padding: 12px 30px; /* Increased newsletter button padding */
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1rem; /* Larger newsletter button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            width: auto; /* Adjust width to content */
+        }
+        #newsletter form button:hover {
+            background-color: #f0f0f0; /* Slightly lighter on hover */
+        }
+
+        /* Room Booking Form Styles */
+        #booking-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        #booking-form .booking-form-content {
+            background-color: #fff;
+            padding: 40px; /* Increased booking form padding */
+            border-radius: 10px;
+            max-width: 800px; /* Increased booking form width */
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow-y: auto; /* Add scrollbar for tall forms on small screens */
+            max-height: 90vh;
+        }
+
+        #booking-form h2 {
+            font-size: 2.5rem; /* Larger booking form title */
+            color: #1a202c;
+            margin-bottom: 40px; /* Increased booking form title margin */
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+        #booking-form form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px; /* Increased gap in booking form */
+            margin-bottom: 20px;
+        }
+        #booking-form form .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        #booking-form form .form-group label {
+            font-family: 'Playfair Display', serif;
+            color: #1a202c;
+            font-size: 1.1rem; /* Larger label text */
+            margin-bottom: 8px;
+            display: block;
+        }
+        #booking-form form .form-group input,
+        #booking-form form .form-group select {
+            padding: 12px 15px; /* Increased input padding */
+            border-radius: 5px;
+            border: 2px solid #e2e8f0; /* Tailwind's gray-200 */
+            font-size: 1.1rem; /* Larger input text */
+            color: #4a5568;
+            outline: none;
+            transition: border-color 0.2s ease;
+            width: 100%;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+        #booking-form form .form-group input:focus,
+        #booking-form form .form-group select:focus {
+            border-color: #a78bfa; /* Tailwind's purple-400 on focus */
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.16); /* Add a subtle shadow */
+        }
+        #booking-form form button {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+            padding: 15px 30px; /* Increased button padding */
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1rem; /* Larger button text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            grid-column: span 2;
+            margin-top: 20px;
+            width: auto;
+            align-self: center;
+        }
+        #booking-form form button:hover {
+            background-color: #7e57c2; /* Tailwind's purple-600 on hover */
+        }
+        #booking-form .booking-confirmation {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0fdf4; /* Tailwind's green-100 */
+            border: 1px solid #38a169; /* Tailwind's green-600 */
+            border-radius: 5px;
+            color: #38a169;
+            font-size: 1.1rem; /* Larger confirmation text */
+            text-align: center;
+            display: none;
+        }
+        #booking-form .close-booking-form {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem; /* Larger close button */
+            color: #4a5568;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+        }
+        #booking-form .close-booking-form:hover {
+            color: #a78bfa; /* Tailwind's purple-400 on hover */
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup .popup-content {
+            background-color: #fff;
+            padding: 40px; /* Increased popup content padding */
+            border-radius: 10px;
+            max-width: 600px; /* Increased popup content width */
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .popup .popup-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; /* Larger popup title */
+            color: #1a202c;
+            margin-bottom: 20px; /* Increased popup title margin */
+        }
+        .popup .popup-content p {
+            font-size: 1.1rem; /* Larger popup text */
+            color: #4a5568;
+            line-height: 1.7; /* Increased popup text line height */
+            margin-bottom: 30px; /* Increased popup text margin */
+        }
+        .popup .popup-content .close-popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem; /* Larger close button */
+            color: #4a5568;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+        }
+        .popup .popup-content .close-popup:hover {
+            color: #a78bfa; /* Tailwind's purple-400 on hover */
+        }
+        .popup .popup-content .popup-btn {
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+            padding: 15px 30px; /* Increased popup button padding */
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem; /* Larger popup button text */
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            border: none;
+        }
+        .popup .popup-content .popup-btn:hover {
+            background-color: #7e57c2; /* Tailwind's purple-600 on hover */
+        }
+
+        /* Scroll to Top Button */
+        #scroll-to-top {
+            position: fixed; /* Fix button to bottom right of viewport */
+            bottom: 20px;
+            right: 20px;
+            background-color: #a78bfa; /* Tailwind's purple-400 */
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0; /* Initially hide the button */
+            transition: opacity 0.3s ease; /* Smooth transition for opacity */
+            z-index: 1000; /* Ensure button is above other elements */
+            border: none;
+        }
+
+        #scroll-to-top:hover {
+            background-color: #7e57c2; /* Tailwind's purple-600 on hover */
+        }
+
+        #scroll-to-top.show {
+            opacity: 1; /* Show button when scrolled */
+        }
+
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+            }
+            header .hamburger-btn {
+                display: block;
+            }
+            section {
+                padding: 60px 0; /* Adjusted section padding for smaller screens */
+            }
+            section h2 {
+                font-size: 2.2rem; /* Adjusted section title size for smaller screens */
+                margin-bottom: 30px;
+            }
+            .section-content p {
+                font-size: 1rem;
+            }
+            #about .grid,
+            #restaurant .grid,
+            #club .grid {
+                grid-template-columns: 1fr;
+            }
+            #about .grid .content,
+            #restaurant .grid .content,
+            #club .grid .content {
+                text-align: center;
+            }
+            #rooms .grid,
+            #team .grid {
+                grid-template-columns: 1fr;
+            }
+            .carousel {
+                height: 500px; /* Adjusted carousel height for smaller screens */
+            }
+            .carousel .carousel-item .carousel-caption {
+                bottom: 30px; /* Adjusted caption position for smaller screens */
+                left: 30px; /* Adjusted caption position for smaller screens */
+                padding: 20px; /* Adjusted caption padding for smaller screens */
+                width: 80%; /* Adjusted caption width for smaller screens */
+            }
+            .carousel .carousel-item .carousel-caption h3 {
+                font-size: 1.8rem; /* Adjusted caption title size for smaller screens */
+            }
+            .carousel .carousel-item .carousel-caption p {
+                font-size: 1rem; /* Adjusted caption text size for smaller screens */
+            }
+            #gallery .gallery-filter button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+            #newsletter h2 {
+                font-size: 2rem; /* Adjusted newsletter title size for smaller screens */
+            }
+            #newsletter p {
+                font-size: 1rem;
+            }
+            #newsletter form {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            #newsletter form input,
+            #newsletter form button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            #booking-form form {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            #booking-form form button {
+                grid-column: span 1;
+            }
+            .popup .popup-content {
+                padding: 30px;
+            }
+            .popup .popup-content h2 {
+                font-size: 1.8rem; /* Adjusted popup title size for smaller screens */
+            }
+            .popup .popup-content p {
+                font-size: 1rem;
+            }
+            footer .contact-info {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .logo {
+                font-size: 1.75rem; /* Adjusted logo size for very small screens */
+            }
+            .carousel {
+                height: 400px; /* Adjusted carousel height for very small screens */
+            }
+            .carousel .carousel-item .carousel-caption {
+                bottom: 20px; /* Adjusted caption position for very small screens */
+                left: 20px; /* Adjusted caption position for very small screens */
+                padding: 15px; /* Adjusted caption padding for very small screens */
+                width: 90%; /* Adjusted caption width for very small screens */
+            }
+            .carousel .carousel-item .carousel-caption h3 {
+                font-size: 1.6rem; /* Adjusted caption title size for very small screens */
+            }
+            .carousel .carousel-item .carousel-caption p {
+                font-size: 0.9rem; /* Adjusted caption text size for very small screens */
+            }
+            #gallery .gallery-filter {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #gallery .gallery-filter button {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            #newsletter h2 {
+                font-size: 1.75rem; /* Adjusted newsletter title size for very small screens */
+            }
+            #newsletter p {
+                font-size: 0.9rem;
+            }
+            .popup .popup-content {
+                padding: 20px;
+            }
+            .popup .popup-content h2 {
+                font-size: 1.6rem; /* Adjusted popup title size for very small screens */
+            }
+            .popup .popup-content p {
+                font-size: 0.9rem;
+            }
+            #booking-form form {
+                gap: 20px;
+            }
+            footer .contact-info {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">O-Touch Palace</a>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#restaurant">Restaurant</a></li>
+                    <li><a href="#club">Club</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#map">Map</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                    <li><a href="#" id="book-now-link">Book Now</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu hidden">
+        <div class="menu-content">
+            <button id="close-menu-btn" class="close-btn" aria-label="Close Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#restaurant">Restaurant</a></li>
+                    <li><a href="#club">Club</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#map">Map</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                    <li><a href="#" id="mobile-book-now-link">Book Now</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('./images/hotel-luxury.jpg')">
+                <div class="carousel-caption">
+                    <h3>Welcome to O-Touch Palace</h3>
+                    <p>Experience unparalleled luxury and comfort.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('./images/hotel-restaurant.jpg')">
+                <div class="carousel-caption">
+                    <h3>Fine Dining</h3>
+                    <p>Indulge in exquisite culinary delights.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('./images/hotel-club.jpg')">
+                <div class="carousel-caption">
+                    <h3>Exclusive Nightlife</h3>
+                    <p>Enjoy vibrant nightlife and entertainment.</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-control prev" data-slide="prev">Previous</button>
+            <button class="carousel-control next" data-slide="next">Next</button>
+        </div>
+        <div class="carousel-indicators">
+            <button class="carousel-indicator active" data-slide-to="0"></button>
+            <button class="carousel-indicator" data-slide-to="1"></button>
+            <button class="carousel-indicator" data-slide-to="2"></button>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="grid">
+                <div class="content">
+                    <h3>Welcome to O-Touch Palace</h3>
+                    <p>
+                        Located in the heart of the city, O-Touch Palace offers unparalleled luxury and comfort.
+                        Our commitment to exceptional service and attention to detail ensures a memorable stay for every guest.
+                    </p>
+                    <p>
+                        From our elegantly appointed rooms to our world-class dining, we provide an experience that exceeds expectations.
+                    </p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+                <img src="./images/otouch.jpg" alt="Hotel Lobby">
+            </div>
+        </div>
+    </section>
+
+    <section id="restaurant">
+        <div class="container">
+            <h2>Our Restaurant</h2>
+            <div class="grid">
+                <img src="./images/a1.jpg" alt="Restaurant Table">
+                <div class="content">
+                    <h3>Culinary Delights</h3>
+                    <p>
+                        Indulge in a culinary journey at our award-winning restaurant. Our chefs create exquisite dishes using the finest local and international ingredients.
+                    </p>
+                    <p>
+                        Experience fine dining in an elegant atmosphere, with impeccable service and an extensive wine list.
+                    </p>
+                    <a href="#" class="btn book-table-btn">Book a Table</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="club">
+        <div class="container">
+            <h2>Our Club</h2>
+            <div class="grid">
+                <div class="content">
+                    <h3>Exclusive Nightlife</h3>
+                    <p>
+                        Experience the vibrant nightlife at our exclusive club.  Enjoy live music, signature cocktails, and a sophisticated ambiance.
+                    </p>
+                    <p>
+                       Our club is the perfect place to unwind, socialize, and create unforgettable memories.
+                    </p>
+                    <a href="#contact" class="btn">Visit Club</a>
+                </div>
+                <img src="./images/ot3.jpg" alt="Nightclub">
+            </div>
+        </div>
+    </section>
+
+    <section id="rooms">
+        <div class="container">
+            <h2>Our Rooms</h2>
+            <div class="grid">
+                <div class="room-card">
+                    <img src="./images/OT1.jpg" alt="Standard Room">
+                    <h3>Standard Room</h3>
+                    <p>Comfortable and well-appointed, perfect for a relaxing stay.</p>
+                </div>
+                <div class="room-card">
+                    <img src="./images/g4.jpg" alt="Deluxe Suite">
+                    <h3>Deluxe Suite</h3>
+                    <p>Spacious suite with luxurious amenities and stunning views.</p>
+                </div>
+                <div class="room-card">
+                    <img src="./images/g10.jpg" alt="Luxury Room">
+                    <h3>Luxury Room</h3>
+                    <p>Experience the ultimate in luxury with our premium accommodations.</p>
+                </div>
+            </div>
+            <a href="#" class="btn book-room-btn">Book a Room</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Photo and Video Gallery</h2>
+            <div class="gallery-filter">
+                <button data-filter="all" class="active">All</button>
+                <button data-filter="photos">Photos</button>
+                <button data-filter="videos">Videos</button>
+            </div>
+            <div class="gallery-grid">
+                <div class="item" data-type="photos">
+                    <img src="./images/hotel-lobby.jpg" alt="Hotel Lobby">
+                    <div class="overlay">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="item" data-type="videos">
+                    <video controls poster="./images/video-placeholder.jpg">
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="item" data-type="photos">
+                    <img src="./images/hotel-room.jpg" alt="Hotel Room">
+                    <div class="overlay">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="item" data-type="videos">
+                    <video controls poster="./images/video-placeholder.jpg">
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="item" data-type="photos">
+                    <img src="./images/hotel-restaurant.jpg" alt="Hotel Restaurant">
+<div class="overlay">
+                        <i class="fas fa-image"></i>
+                    </div>
+                </div>
+                <div class="item" data-type="videos">
+                    <video controls poster="./images/video-placeholder.jpg">
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map">
+        <div class="container">
+            <h2>Our Location</h2>
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.532628511062!2d37.356278810713576!3d-0.6856659352620822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1826210c3a972bff%3A0x81e868489691060e!2sCLUB%20O'TOUCH-MWEA!5e0!3m2!1sen!2ske!4v1747224969485!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>
+                Stay updated with our latest offers and news.  Subscribe to our newsletter and receive exclusive
+                promotions and updates directly to your inbox.
+            </p>
+            <form id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div id="newsletter-message" style="margin-top: 20px; color: white; font-size: 1.1rem; display: none;"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div id="message-sent" class="message-sent">
+                    Message sent successfully!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="contact-info">
+                Phone: +123 456 7890 | Email: info@otouchpalace.com
+            </div>
+            © 2024 O-Touch Palace. All rights reserved.
+        </div>
+        <button id="scroll-to-top" aria-label="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <div id="welcome-popup" class="popup">
+        <div class="popup-content">
+            <button class="close-popup" aria-label="Close Popup">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2>Welcome to O-Touch Palace</h2>
+            <p>
+                Thank you for visiting our website.  We invite you to experience the ultimate in luxury and hospitality.
+                Explore our site to discover our exclusive offerings.
+            </p>
+            <button class="popup-btn" id="welcome-popup-ok">OK</button>
+        </div>
+    </div>
+
+    <div id="booking-form" class="popup">
+        <div class="booking-form-content">
+            <button class="close-booking-form" aria-label="Close Booking Form">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2>Book Your Stay</h2>
+            <form id="room-booking-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+</div>
+                <div class="form-group">
+                    <label for="room-type">Room Type:</label>
+                    <select id="room-type" name="room-type">
+                        <option value="standard">Standard Room</option>
+                        <option value="deluxe">Deluxe Suite</option>
+                        <option value="luxury">Luxury Room</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in Date:</label>
+                    <input type="date" id="check-in" name="check-in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date:</label>
+                    <input type="date" id="check-out" name="check-out" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests:</label>
+                    <input type="number" id="guests" name="guests" min="1" required>
+                </div>
+                <button type="submit">Book Now</button>
+            </form>
+            <div class="booking-confirmation">
+                <p>Your booking has been confirmed.  Thank you!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        const navLinks = document.querySelectorAll('.desktop-nav a');
+        const sections = document.querySelectorAll('section');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle("hidden");
+        }
+
+        hamburgerBtn.addEventListener("click", toggleMobileMenu);
+        closeMenuBtn.addEventListener("click", toggleMobileMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener("click", toggleMobileMenu);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && event.target !== hamburgerBtn) {
+                toggleMobileMenu();
+            }
+        });
+
+        function updateActiveNavLink() {
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Carousel
+        const carousel = document.querySelector('.carousel');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const carouselControls = document.querySelectorAll('.carousel-control');
+        const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+        let currentItem = 0;
+        let intervalId;
+
+        function showItem(index) {
+            carouselItems.forEach(item => item.classList.remove('active'));
+            carouselIndicators.forEach(indicator => indicator.classList.remove('active'));
+            carouselItems[index].classList.add('active');
+            carouselIndicators[index].classList.add('active');
+        }
+
+        function nextItem() {
+            currentItem = (currentItem + 1) % carouselItems.length;
+            showItem(currentItem);
+        }
+
+        function prevItem() {
+            currentItem = (currentItem - 1 + carouselItems.length) % carouselItems.length;
+            showItem(currentItem);
+        }
+
+        function handleControlClick(event) {
+            const slide = event.target.dataset.slide;
+            if (slide === 'next') {
+                nextItem();
+            } else {
+                prevItem();
+            }
+            resetInterval();
+        }
+
+        function handleIndicatorClick(event) {
+            const slideTo = event.target.dataset.slideTo;
+            currentItem = parseInt(slideTo);
+            showItem(currentItem);
+            resetInterval();
+        }
+
+        function startInterval() {
+            intervalId = setInterval(nextItem, 5000);
+        }
+
+        function resetInterval() {
+            clearInterval(intervalId);
+            startInterval();
+        }
+
+        carouselControls.forEach(control => control.addEventListener('click', handleControlClick));
+        carouselIndicators.forEach(indicator => indicator.addEventListener('click', handleIndicatorClick));
+        startInterval();
+
+        carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
+        carousel.addEventListener('mouseleave', startInterval);
+
+        // Photo and Video Gallery
+        const galleryFilter = document.querySelector('.gallery-filter');
+        const galleryItems = document.querySelectorAll('.gallery-grid .item');
+        const FADE_DURATION = 400;
+
+        galleryFilter.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                const filter = event.target.dataset.filter;
+                document.querySelectorAll('.gallery-filter button').forEach(button => button.classList.remove('active'));
+                event.target.classList.add('active');
+
+                galleryItems.forEach(item => {
+                    const itemType = item.dataset.type;
+                    if (filter === 'all' || filter === itemType) {
+                        item.style.transition = `opacity ${FADE_DURATION}ms ease-in-out`;
+                        item.style.opacity = 1;
+                        setTimeout(() => {
+                            item.style.display = 'block';
+                        }, FADE_DURATION);
+                    } else {
+                        item.style.transition = `opacity ${FADE_DURATION}ms ease-in-out`;
+                        item.style.opacity = 0;
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, FADE_DURATION);
+                    }
+                });
+            }
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const messageSent = document.getElementById('message-sent');
+        const roomBookingForm = document.getElementById('room-booking-form');
+        const bookingConfirmation = document.querySelector('.booking-confirmation');
+        const newsletterForm = document.getElementById('newsletter-form');
+        const newsletterMessage = document.getElementById('newsletter-message');
+        const bookNowLink = document.getElementById('book-now-link');
+        const mobileBookNowLink = document.getElementById('mobile-book-now-link');
+        const bookingFormElement = document.getElementById('booking-form');
+        const closeBookingFormBtn = document.querySelector('.close-booking-form');
+        const bookRoomBtns = document.querySelectorAll('.book-room-btn');
+        const bookTableBtns = document.querySelectorAll('.book-table-btn');
+
+
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+             // Simulate sending the message
+            setTimeout(() => {
+                messageSent.classList.remove('hidden');
+                 // Reset the form
+                contactForm.reset();
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    messageSent.classList.add('hidden');
+                }, 3000);
+            }, 1000);
+        });
+
+        roomBookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+             // Simulate booking
+            setTimeout(() => {
+                bookingConfirmation.style.display = 'block';
+                 // Reset the form
+                roomBookingForm.reset();
+                 // Hide confirmation after 3 seconds
+                setTimeout(() => {
+                    bookingConfirmation.style.display = 'none';
+                    bookingFormElement.style.display = 'none';
+                }, 3000);
+            }, 1000);
+        });
+
+        newsletterForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Simulate newsletter subscription
+            newsletterMessage.textContent = 'Thank you for subscribing!';
+            newsletterMessage.style.display = 'block';
+
+            setTimeout(() => {
+                newsletterMessage.style.display = 'none';
+                newsletterForm.reset();
+            }, 3000);
+        });
+
+        // Popup
+        const welcomePopup = document.getElementById('welcome-popup');
+        const closePopupBtn = welcomePopup.querySelector('.close-popup');
+        const welcomePopupOkBtn = document.getElementById('welcome-popup-ok');
+
+        function showPopup() {
+            welcomePopup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            welcomePopup.style.display = 'none';
+        }
+
+        // Show popup after 2 seconds
+        setTimeout(showPopup, 2000);
+        closePopupBtn.addEventListener('click', closePopup);
+        if (welcomePopupOkBtn) {
+            welcomePopupOkBtn.addEventListener('click', closePopup);
+        } else {
+             setTimeout(closePopup, 5000);
+        }
+
+        document.addEventListener('click', (event) => {
+            if (event.target === welcomePopup) {
+                closePopup();
+            }
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Booking form popup functionality
+        bookNowLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            bookingFormElement.style.display = 'flex';
+        });
+
+        mobileBookNowLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            bookingFormElement.style.display = 'flex';
+        });
+
+        closeBookingFormBtn.addEventListener('click', () => {
+            bookingFormElement.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === bookingFormElement) {
+                bookingFormElement.style.display = 'none';
+            }
+        });
+
+        bookRoomBtns.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                bookingFormElement.style.display = 'flex';
+            });
+        });
+
+        bookTableBtns.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                bookingFormElement.style.display = 'flex';
+            });
+        });
+    </script>
+</body>
+</html>
